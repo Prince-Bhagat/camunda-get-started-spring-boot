@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="uw_age_validation_dmn" name="uw_age_validation_dmn" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.1.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <decision id="uw_age_validation" name="uw_age_validation">
+    <decisionTable id="DecisionTable_16k3zqg" hitPolicy="FIRST">
+      <input id="InputClause_05q8394" camunda:inputVariable="age">
+        <inputExpression id="LiteralExpression_1usnlsv" typeRef="integer" expressionLanguage="feel">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="uw_decision" typeRef="string">
+        <outputValues id="UnaryTests_1g9pvn5">
+          <text>"Reject","Accept","NSTP"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_1kl61gy" name="text" typeRef="string" />
+      <rule id="DecisionRule_0vgp34s">
+        <inputEntry id="UnaryTests_1yfocia">
+          <text>&lt;18</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1twe3cj">
+          <text>"REJECT"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11ohr0k">
+          <text>"Insured member age is not permitted in this plan."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bnwor9">
+        <inputEntry id="UnaryTests_1nahla5">
+          <text>[18..65]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0qsd5eg">
+          <text>"ACCEPT"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1agx3es">
+          <text>"Insured member age is permitted in this plan."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0peflmi">
+        <inputEntry id="UnaryTests_1qm6uia">
+          <text>&gt;65</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0em6eqw">
+          <text>"REJECT"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10m1esg">
+          <text>"Insured member age is not permitted in this plan."</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="uw_age_validation">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
