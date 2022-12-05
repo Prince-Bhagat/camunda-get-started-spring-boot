@@ -4,68 +4,84 @@
     <bpmn2:startEvent id="StartEvent_1" name="Loan Request&#10;Received">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="Activity_0o2wbcf" />
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="ageValidation" />
     <bpmn2:endEvent id="EndEvent_1" name="Loan Request&#10;Processed">
-      <bpmn2:incoming>Flow_1y8lu1q</bpmn2:incoming>
+      <bpmn2:incoming>Flow_081efel</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:businessRuleTask id="ageValidation" name="Age Validation" camunda:resultVariable="uwResult" camunda:decisionRef="uw_age_validation" camunda:mapDecisionResult="singleResult">
       <bpmn2:extensionElements />
-      <bpmn2:incoming>Flow_1uynrdt</bpmn2:incoming>
-      <bpmn2:outgoing>Flow_1kbh5ic</bpmn2:outgoing>
-    </bpmn2:businessRuleTask>
-    <bpmn2:sequenceFlow id="Flow_1kbh5ic" sourceRef="ageValidation" targetRef="Activity_1rq52xe" />
-    <bpmn2:sequenceFlow id="Flow_1uynrdt" sourceRef="Activity_0o2wbcf" targetRef="ageValidation" />
-    <bpmn2:serviceTask id="Activity_0o2wbcf" name="Logger" camunda:delegateExpression="${logger}">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
-      <bpmn2:outgoing>Flow_1uynrdt</bpmn2:outgoing>
+      <bpmn2:outgoing>Flow_0ge1b10</bpmn2:outgoing>
+    </bpmn2:businessRuleTask>
+    <bpmn2:sequenceFlow id="Flow_0ge1b10" sourceRef="ageValidation" targetRef="Activity_0n9c3bs" />
+    <bpmn2:sequenceFlow id="Flow_1yrrphb" sourceRef="Activity_0n9c3bs" targetRef="Activity_1nkhmfo" />
+    <bpmn2:receiveTask id="Activity_0n9c3bs" name="Applcant Details" messageRef="Message_1c5i6v8">
+      <bpmn2:extensionElements />
+      <bpmn2:incoming>Flow_0ge1b10</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1yrrphb</bpmn2:outgoing>
+    </bpmn2:receiveTask>
+    <bpmn2:receiveTask id="Activity_1nkhmfo" name="Applcant Details" messageRef="Message_1c5i6v8">
+      <bpmn2:incoming>Flow_1yrrphb</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0mrq7ht</bpmn2:outgoing>
+    </bpmn2:receiveTask>
+    <bpmn2:sequenceFlow id="Flow_0mrq7ht" sourceRef="Activity_1nkhmfo" targetRef="Activity_0unnviq" />
+    <bpmn2:sequenceFlow id="Flow_081efel" sourceRef="Activity_0unnviq" targetRef="EndEvent_1" />
+    <bpmn2:serviceTask id="Activity_0unnviq" name="Service Task" camunda:delegateExpression="${serviceTask}">
+      <bpmn2:incoming>Flow_0mrq7ht</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_081efel</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:serviceTask id="Activity_1rq52xe" name="Logger" camunda:delegateExpression="${logger}">
-      <bpmn2:incoming>Flow_1kbh5ic</bpmn2:incoming>
-      <bpmn2:outgoing>Flow_1y8lu1q</bpmn2:outgoing>
-    </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="Flow_1y8lu1q" sourceRef="Activity_1rq52xe" targetRef="EndEvent_1" />
   </bpmn2:process>
+  <bpmn2:message id="Message_1c5i6v8" name="applicantDetails" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="loanApproval">
-      <bpmndi:BPMNEdge id="Flow_1kbh5ic_di" bpmnElement="Flow_1kbh5ic">
-        <di:waypoint x="510" y="122" />
-        <di:waypoint x="580" y="122" />
+      <bpmndi:BPMNEdge id="Flow_081efel_di" bpmnElement="Flow_081efel">
+        <di:waypoint x="950" y="122" />
+        <di:waypoint x="1032" y="122" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_3" targetElement="Activity_06lzw46_di">
+      <bpmndi:BPMNEdge id="Flow_0mrq7ht_di" bpmnElement="Flow_0mrq7ht">
+        <di:waypoint x="770" y="122" />
+        <di:waypoint x="850" y="122" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yrrphb_di" bpmnElement="Flow_1yrrphb">
+        <di:waypoint x="600" y="122" />
+        <di:waypoint x="670" y="122" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ge1b10_di" bpmnElement="Flow_0ge1b10">
+        <di:waypoint x="400" y="122" />
+        <di:waypoint x="500" y="122" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_3" targetElement="Activity_0g0u443_di">
         <di:waypoint x="208" y="122" />
-        <di:waypoint x="260" y="122" />
+        <di:waypoint x="300" y="122" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="240" y="157" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1uynrdt_di" bpmnElement="Flow_1uynrdt">
-        <di:waypoint x="360" y="122" />
-        <di:waypoint x="410" y="122" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1y8lu1q_di" bpmnElement="Flow_1y8lu1q">
-        <di:waypoint x="680" y="122" />
-        <di:waypoint x="772" y="122" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_0g0u443_di" bpmnElement="ageValidation">
-        <dc:Bounds x="410" y="82" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_3" bpmnElement="StartEvent_1">
         <dc:Bounds x="172" y="104" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="157" y="140" width="69" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_06lzw46_di" bpmnElement="Activity_0o2wbcf">
-        <dc:Bounds x="260" y="82" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_3" bpmnElement="EndEvent_1">
-        <dc:Bounds x="772" y="104" width="36" height="36" />
+        <dc:Bounds x="1032" y="104" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="757" y="140" width="69" height="27" />
+          <dc:Bounds x="1017" y="140" width="69" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1vcp3iy" bpmnElement="Activity_1rq52xe">
-        <dc:Bounds x="580" y="82" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_0g0u443_di" bpmnElement="ageValidation">
+        <dc:Bounds x="300" y="82" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rfb0ww_di" bpmnElement="Activity_0n9c3bs">
+        <dc:Bounds x="500" y="82" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1sz3x0w_di" bpmnElement="Activity_0unnviq">
+        <dc:Bounds x="850" y="82" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0kf97f6" bpmnElement="Activity_1nkhmfo">
+        <dc:Bounds x="670" y="82" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
